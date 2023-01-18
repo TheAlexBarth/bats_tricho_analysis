@@ -56,6 +56,7 @@ trich_data<-trich_data |>
 # Get concentration of trichodesmium!
 # Try multiple depth bins!
 
+start <- Sys.Date()
 trich_conc <- trich_data |>
   uvp_zoo_conc(breaks = c(0,100,200,500))
 
@@ -69,4 +70,11 @@ trich_conc_20mBin <- trich_data |>
 
 trich_conc_50mBin <- trich_data |>
   uvp_zoo_conc(breaks= c(0,50,100,150,200,250,300,350,400,450,500))
+end <- Sys.Date()
+
+
+saveRDS(trich_conc, './data/01_trich-conc-noBins.rds')
+saveRDS(trich_conc_20mBin, './data/01_trich-conc-20Bins.rds')
+saveRDS(trich_conc_50mBin, './data/01_trich-conc-50Bins.rds')
+
                

@@ -42,7 +42,7 @@ if(length(drop_casts) > 0) {
 # restore class structure to the object
 # Note for alex: if package is fixed to true S3 structure, this might be obsolete
 trich_data <- as_ecopart_obj(trich_data)
-
+saveRDS(trich_data, './data/01_tricho-trim-cast.rds')
 
 # |- Final Data Formatting -------------------------------
 
@@ -57,24 +57,24 @@ trich_data<-trich_data |>
 # Try multiple depth bins!
 
 start <- Sys.Date()
-trich_conc <- trich_data |>
-  uvp_zoo_conc(breaks = c(0,100,200,500))
+# trich_conc <- trich_data |>
+#   uvp_zoo_conc(breaks = c(0,100,200,500))
 
 # Try with a sequence of 20m depth bins, breaks must equal
 # all values 0-500 in 20m intervals. name it trich_conc_20mBin
 
 trich_conc_20mBin <- trich_data |>
-    uvp_zoo_conc(breaks= c(0,20,40,60,80,100,120,140,160,180,200,220,240,260,280,300,320,340,360,380,400,420,440,460,480,500))
+    uvp_zoo_conc(breaks= seq(0,500,20))
 
 # Try again with 50m. trich_conc_50mBin
-
-trich_conc_50mBin <- trich_data |>
-  uvp_zoo_conc(breaks= c(0,50,100,150,200,250,300,350,400,450,500))
+# 
+# trich_conc_50mBin <- trich_data |>
+#   uvp_zoo_conc(breaks= c(0,50,100,150,200,250,300,350,400,450,500))
 end <- Sys.Date()
 
 
-saveRDS(trich_conc, './data/01_trich-conc-noBins.rds')
+# saveRDS(trich_conc, './data/01_trich-conc-noBins.rds')
 saveRDS(trich_conc_20mBin, './data/01_trich-conc-20Bins.rds')
-saveRDS(trich_conc_50mBin, './data/01_trich-conc-50Bins.rds')
+# saveRDS(trich_conc_50mBin, './data/01_trich-conc-50Bins.rds')
 
                

@@ -2,6 +2,9 @@
 # Organize Profiles by Station #########
 ###
 rm(list = ls())
+library(EcotaxaTools)
+library(dplyr)
+library(ggplot2)
 
 # Read in the 20m bin data
 tricho_conc <- readRDS('./data/01_trich-conc-20Bins.rds')
@@ -16,10 +19,34 @@ name_map <- list(
 
 # Integrate cast profiles
 
-intg_casts <-tricho_conc |>
+intg_casts <- tricho_conc |>
     lapply(integrate_all, need_format= TRUE, subdivisions=1000) |>
       lapply(intg_to_tib) |>
         list_to_tib('profileid')
+
+intg_casts <- metadata |>
+  select(c(profileid, stationid)) |> 
+  right_join(intg_casts, by = 'profileid')
+
+# rename bloom casts for gf
+# -
+
+avg_intg <- intg_casts |> 
+  group_by(stationid) |> 
+  summarize(mean = mean(intg),
+            sd = sd(intg))
+
+
+# Plotting average integrated abundance
+
+# create histogram for gf casts integrates - use intg_casts
+
+
+# create histogram for hs casts integrates - use intg_casts
+
+
+# create bar plot for averages
+
 
 
 # Average casts by station

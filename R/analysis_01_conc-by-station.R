@@ -32,11 +32,6 @@ intg_casts <- metadata |>
 # rename bloom casts for gf
 # -
 
-avg_intg <- intg_casts |> 
-  group_by(stationid) |> 
-  summarize(mean = mean(intg),
-            sd = sd(intg))
-
 
 # Plotting average integrated abundance
 

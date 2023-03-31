@@ -35,8 +35,19 @@ mo_intg_tricho <- intg_casts |>
   summarize(mean_intg = mean(intg),
             sd = sd(intg))
 
+#create new row, hs=0 for plot in month 9
+mo_intg_tricho<- rbind(mo_intg_tricho,data.frame(stationid='hs',month=9,mean_intg=0,sd=0))
+
+
+
 # Plot
 # create a bar plot
+
+ggplot(data=mo_intg_tricho)+
+    labs(y="Trichodesmium Abundance",x="Month")+
+    geom_bar(aes(fill=stationid,x=as.factor(month),y=mean_intg),position="dodge",stat="identity")+
+        geom_errorbar(aes(x = as.factor(month), ymin = mean_intg, ymax = (mean_intg+sd),group=stationid),
+               position="dodge", alpha = .25)
 
 # x=  month, y=mean_intg
 # you might want to use x=as.factor(month)

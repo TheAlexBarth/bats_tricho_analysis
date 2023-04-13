@@ -26,13 +26,13 @@ avg_conc <- tricho_conc |>
 
 # Plot By Station
 ggplot()+
-  geom_rect(data = avg_conc$gf,
+  geom_rect(data = avg_conc$gf,colour = "#232323",fill="#8CEEED",
             aes(xmin = min_d, xmax = max_d,
                 ymin = 0, ymax = -mean)) +
   geom_errorbar(data = avg_conc$gf,
                 aes(x = mp, ymin = -mean, ymax = -(mean+sd)),
                 alpha = .25) +
-  geom_rect(data = avg_conc$hs,
+  geom_rect(data = avg_conc$hs,colour = "#232323",fill="#339A9A",
             aes(xmin = min_d, xmax = max_d,
                 ymin = 0, ymax = mean)) +
   geom_errorbar(data = avg_conc$hs,
@@ -43,5 +43,5 @@ ggplot()+
   scale_x_reverse(expand = c(0,0))+
   scale_y_continuous(position = 'right',
                      labels = abs) +
-  theme_pubr()
+  theme_gray()
 

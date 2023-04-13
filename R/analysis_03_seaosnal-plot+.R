@@ -45,7 +45,8 @@ mo_intg_tricho<- rbind(mo_intg_tricho,data.frame(stationid='hs',month=9,mean_int
 
 ggplot(data=mo_intg_tricho)+
     labs(y="Trichodesmium Abundance",x="Month")+
-    geom_bar(aes(fill=stationid,x=as.factor(month),y=mean_intg),position="dodge",stat="identity")+
+    geom_bar(aes(fill=stationid,x=as.factor(month),y=mean_intg),position="dodge",stat="identity")+     
+     scale_fill_manual(values=c('#FF9A8A', '#D2042D'))+
         geom_errorbar(aes(x = as.factor(month), ymin = mean_intg, ymax = (mean_intg+sd),group=stationid),
                position="dodge", alpha = .25)
 
